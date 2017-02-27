@@ -2,13 +2,114 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>TaxonomyPrototype</title>
+  <title>Taxonomy Prototype</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+
+<script src='https://code.jquery.com/jquery-3.1.1.min.js'></script>
+<script src='https://code.jquery.com/ui/1.12.1/jquery-ui.min.js'></script>
+
+<script type='text/javascript'>
+$(function(){
+  $('#trainer').draggable();
+})
+</script>
+
+  <style type='text/css'>
+  #trainer{
+    z-index:999;
+    width:300px;
+    position:absolute;
+    right:40px;
+    top:40px;
+  }
+  </style>
 </head>
 <body>
-  <app-root>Loading...</app-root>
+  <div class="card" id='trainer'>
+        <div class="card-header h6 card-inverse card-primary">
+          Inline Trainer
+        </div>
+        <div class="card-block">
+          <inline-trainer>Loading...</inline-trainer>
+
+        </div>
+      </div>
+  <div class='container-fluid'>
+  	<div class='row'>
+  		<div class='col'>
+  			<h1>171MOOD-2A: My LATTE Course</h1>
+			<ol class="breadcrumb">
+			  <li class='breadcrumb-item'><a href="#">Dashboard</a></li>
+			  <li class='breadcrumb-item'><a href="#">Spring 2017</a></li>
+			  <li class='breadcrumb-item'><a href="#">Registrar Courses</a></li>
+			  <li class='breadcrumb-item'><a href="#">Arts and Sciences</a></li>
+			  <li class='breadcrumb-item'><a href="#">MOODLE</a></li>
+			  <li class="breadcrumb-item active">171MOOD-2A</li>
+			</ol>
+  		</div>
+  	</div>
+  	<div class='row'>
+  		<div class='col-sm-3'>
+  			<div class="card">
+			  <div class="card-header h6 card-inverse card-primary">
+			  	Course Tools
+			  </div>
+			  <div class="card-block">
+			    <ul class='list-unstyled'>
+			    	<li><a href='#'>Grades</a></li>
+			    	<li><a href='#'>Get Course Syllabus</a></li>
+			    </ul>
+			  </div>
+			</div>
+
+  	
+
+  			<div class="card">
+			  <div class="card-header h6 card-inverse card-primary">
+			  	Something else
+			  </div>
+			  <div class="card-block">
+			    <p>Here's one more block for good measure</p>
+
+			  </div>
+			</div>
+  		</div>
+  		<div class='col-sm-9'>
+  			<h1>General</h1>
+  			<h2>Office Hours</h2>
+  			<p>Instructor:</p>
+  			<ul>
+  				<li>MW 5:00 PM to 6:30 PM</li>
+  			</ul>
+  			<p>TA:</p>
+  			<ul>
+  				<li>ThF 11:00 AM to 12:00 PM</li>
+  			</ul>
+
+  			<ul class='list-unstyled'>
+  				<li><a href='#'>Course News & Announcements</a></li>
+  				<li><a href='#'>Introduce yourself</a></li>
+  			</ul>
+  			<hr>
+  			<h2>Week 1</h2>
+  			<ul class='list-unstyled'>
+  				<li><a href='#'>Lecture slides</a></li>
+  				<li><a href='#'>Homework</a></li>
+  			</ul>
+  			<hr>
+  			<h2>Week 2</h2>
+  			<ul class='list-unstyled'>
+  				<li><a href='#'>Lecture slides</a></li>
+  				<li><a href='#'>Homework</a></li>
+  			</ul>
+  		</div>
+  	</div>
+  </div>
 </body>
 </html>

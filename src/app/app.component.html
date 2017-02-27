@@ -1,3 +1,34 @@
-<h1>
-  {{title}}
-</h1>
+<div id='draggable'>
+<p>Need help? Browse the following categories to learn how to perform common tasks. Click on a task to see its instructions.</p>
+<ngb-accordion [closeOthers]="true">
+	<ngb-panel *ngIf="settings.showSearch" title="Search">
+		<template ngbPanelContent>
+			<input type='text' [(ngModel)]='search'>
+			<ul class='list-unstyled' *ngIf='search!=""'>
+				<li *ngFor="let action of actions | actionSearch:search">
+					<button class='btn btn-link'>{{action.name}}</button>
+				</li>
+			</ul>
+		</template>
+	</ngb-panel>
+	<ngb-panel *ngFor="let category of categories | keyValueFilter | topLevelCategory" title="{{category.value.name}}">
+		<template ngbPanelContent>
+			<ul class='list-unstyled'>
+
+				<li *ngFor="let action of actions | actionCategory:category.value">
+					<button class='btn btn-link'>{{action.name}}</button>
+				</li>
+				<li *ngFor="let subCategory of categories | keyValueFilter | childCategory:category">
+					<b (click)="subcategories[subCategory.key]=!subcategories[subCategory.key]" style='cursor:pointer;'><i *ngIf="!subcategories[subCategory.key]" class="fa fa-plus" aria-hidden="true"></i><i *ngIf="subcategories[subCategory.key]" class="fa fa-minus" aria-hidden="true"></i> {{subCategory.value.name}}</b>
+					<ul *ngIf="subcategories[subCategory.key]" class='list-unstyled'>
+						<li *ngFor="let action of actions | actionCategory:subCategory.value">
+							<button class='btn btn-link'>{{action.name}}</button>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</template>
+	</ngb-panel>
+</ngb-accordion>
+</div>
+

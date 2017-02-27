@@ -1,20 +1,30 @@
+import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
 
-import { AppComponent } from './app.component';
+import { AppComponent }  from './app.component';
+
+import { FormsModule }    from '@angular/forms';
+
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+import {KeyValueFilterPipe} from './key-value-filter.pipe';
+import {ActionCategoryPipe} from './action-category.pipe';
+import {ActionSearchPipe} from './action-search.pipe';
+import {TopLevelCategoryPipe} from './top-level-category.pipe';
+import {ChildCategoryPipe} from './child-category.pipe';
+
+
+
+
 
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+  imports:      [ BrowserModule, NgbModule.forRoot(), FormsModule ],
+  declarations: [ AppComponent, KeyValueFilterPipe, ActionCategoryPipe, ActionSearchPipe, TopLevelCategoryPipe, ChildCategoryPipe ],
+  bootstrap:    [ AppComponent ]
 })
-export class AppModule { }
+
+
+export class AppModule{
+
+	
+}

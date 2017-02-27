@@ -1,10 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
+
+import {CATEGORIES} from './categories';
+
+import {ACTIONS} from './actions';
+
+import {SETTINGS} from './settings';
+
+
 
 @Component({
-  selector: 'app-root',
+  selector: 'inline-trainer',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'app works!';
+
+
+
+export class AppComponent implements AfterViewInit  {
+	categories=CATEGORIES;
+	actions=ACTIONS;
+
+	settings=SETTINGS;
+
+	subcategories={};
+
+	@Input()
+  	search: string="";
+
+  
+
 }
+
