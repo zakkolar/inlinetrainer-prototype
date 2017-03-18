@@ -12,7 +12,6 @@ export class KeyValueFilterPipe {
             let k = 'key';
             let v = 'value'
 
-
             pair[k] = key;
             pair[v] = value[key];
 

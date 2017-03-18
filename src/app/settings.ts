@@ -1,3 +1,3 @@
 export const SETTINGS={
-showSearch:false
+showSearch:true
 };

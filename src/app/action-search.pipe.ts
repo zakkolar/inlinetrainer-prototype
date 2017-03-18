@@ -6,7 +6,9 @@ import { Category } from './category';
 @Pipe({ name: 'actionSearch', pure:false })
 export class ActionSearchPipe implements PipeTransform {
   transform(actions: Action[], search: string) {
-  	console.log('running');
+  	if(search===""){
+  		return [];
+  	}
     return actions.filter(action => action.name.toLowerCase().indexOf(search.toLowerCase())>-1);
   }
 }

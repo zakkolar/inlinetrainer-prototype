@@ -4,13 +4,23 @@ import {CATEGORIES} from './categories';
 
 import {Category} from './category';
 
+import {Step} from './step';
 
-function assembleActions(collection:Action[], categories, actions){
+
+function assembleActions(collection:Action[], categories, actions, extras={}){
 	for(var i=0; i<actions.length; i++){
-		collection.push({
+		var action = {
 			name:actions[i],
-			categories:categories
-		});
+			categories:categories,
+			favorite:false,
+			shown:false,
+			steps:[],
+			help:""
+		};
+		for(var j in extras){
+			action[j]=extras[j];
+		}
+		collection.push(action);
 	}
 }
 
@@ -21,8 +31,19 @@ assembleActions(actions,[CATEGORIES['old_courses']],[
 	]);
 
 assembleActions(actions,[CATEGORIES['course_settings']],[
-	"Upload course syllabus",
-	'Set course date',
+	"Upload course syllabus"
+	],{
+		steps:[
+		{text:"Navigate to course page"},
+		{text:"Click \"Upload Course Syllabus\""},
+		{text:"Browse for your syllabus"},
+		{text:"Click \"Upload\""}
+		],
+		help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus"
+	});
+
+assembleActions(actions,[CATEGORIES['course_settings']],[
+	'Set course date'
 	]);
 
 assembleActions(actions,[CATEGORIES['course_settings'],CATEGORIES['organize']],[
@@ -59,10 +80,15 @@ assembleActions(actions,[CATEGORIES['organize']],[
 
 assembleActions(actions,[CATEGORIES['resources']],[
 	'Upload document',
-	'Insert link'
+		]);
+
+assembleActions(actions,[CATEGORIES['links']],[
+	'Create links',
+		]);
+
+assembleActions(actions,[CATEGORIES['media']],[
+	'Upload video clip'
 	]);
-
-
 
 assembleActions(actions,[CATEGORIES['communication']],[
 
@@ -75,13 +101,9 @@ assembleActions(actions,[CATEGORIES['messaging']],[
 
 assembleActions(actions,[CATEGORIES['forums']],[
 	'Create a forum',
-	'Post in forum'
+	'Post in forum',
+	'Reply to a post in a forum'
 	]);
-
-assembleActions(actions,[CATEGORIES['assessment']],[
-	]);
-
-
 
 assembleActions(actions,[CATEGORIES['self']],[
 	'Enable progress markers',

@@ -2,6 +2,7 @@ import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent }  from './app.component';
+import { ActionComponent } from './action.component';
 
 import { FormsModule }    from '@angular/forms';
 
@@ -12,6 +13,8 @@ import {ActionCategoryPipe} from './action-category.pipe';
 import {ActionSearchPipe} from './action-search.pipe';
 import {TopLevelCategoryPipe} from './top-level-category.pipe';
 import {ChildCategoryPipe} from './child-category.pipe';
+import {FavoriteActionsPipe} from './favorite-actions.pipe';
+
 
 
 
@@ -19,7 +22,7 @@ import {ChildCategoryPipe} from './child-category.pipe';
 
 @NgModule({
   imports:      [ BrowserModule, NgbModule.forRoot(), FormsModule ],
-  declarations: [ AppComponent, KeyValueFilterPipe, ActionCategoryPipe, ActionSearchPipe, TopLevelCategoryPipe, ChildCategoryPipe ],
+  declarations: [ AppComponent, ActionComponent, KeyValueFilterPipe, ActionCategoryPipe, ActionSearchPipe, TopLevelCategoryPipe, ChildCategoryPipe, FavoriteActionsPipe ],
   bootstrap:    [ AppComponent ]
 })
 
