@@ -37,6 +37,7 @@ export const HINT = function(selector){
 			el.css('margin',wrapper.css('margin'));
 			el.unwrap();
 			el.removeAttr('data-hinted');
+			$(document).unbind('keyup');
 		});
 		
 	}
@@ -52,7 +53,6 @@ export const HINT = function(selector){
 	$(document).keyup(function(e) {
      if (e.keyCode == 27) {
      	removeHint();
-     	$(document).unbind('keyup');
     	}
 	});
 
