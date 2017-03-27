@@ -7,5 +7,6 @@ export class Action{
 	favorite: boolean;
 	steps: Step[];
 	shown: boolean;
+	help;
 
 }

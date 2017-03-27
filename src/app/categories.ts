@@ -5,7 +5,7 @@ let categories: {[id:string]: Category}={};
 
 categories['beginning']=new Category('Course Setup', null, "The tasks you need to set up your course and manage its settings, calendar, and students/TAs.");
 
-categories['course_settings']=new Category('Course Settings',categories['beginning']);
+categories['course_settings']=new Category('Sharing Course Information',categories['beginning']);
 categories['calendar']=new Category('Course Calendar',categories['beginning']);
 categories['users']=new Category('Manage users',categories['beginning']);
 categories['old_courses']=new Category('Old courses',categories['beginning']);

@@ -10,49 +10,49 @@ import {HELPERS} from './helpers';
 
 import {RecentActionsService} from './recent-actions.service';
 
+import {Router} from '@angular/router';
 
+import {COURSE_UTILITIES} from './course-utilities';
 
-var subcategories={};
+var routeLabels={
+	syllabus:'Syllabus'
+};
 
-var panels={};
-
-var showSearch=false;
-
-
-for(var category in CATEGORIES){
-	if(CATEGORIES[category].parent!=null){
-		CATEGORIES[category].open=true;
+var globals={
+	editing:false,
+	blocks:{
+		calendar:false
 	}
-}
+};
+
 
 @Component({
-  selector: 'inline-trainer',
+  selector: 'app',
   templateUrl: './app.component.html',
-})
+}) export class AppComponent  {
 
+	router;
 
+	course_utilties=COURSE_UTILITIES;
 
-export class AppComponent  {
-	categories=CATEGORIES;
-	actions=ACTIONS;
+	syllabus_public=false;
 
-	settings=SETTINGS;
-
-	subcategories=subcategories;
-
-	recent_actions = new RecentActionsService();
+	globals=globals;
 
 	
-
-	stringify=HELPERS.stringify;
-
-	@Input() search: string="";
-
-	public changeFunction($event){
-		// $event.nextState;
+	constructor(private _router: Router ) {
+	  this.router = _router;
 	}
 
-  
+	routeName(route){
+		return routeLabels[route.substr(1)];
+	}
+
+	addBlock(event){
+		var block = event.target.value;
+		console.log(block);
+		this.globals.blocks[block]=true;
+	}
 
 }
 

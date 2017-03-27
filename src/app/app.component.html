@@ -1,92 +1,218 @@
-<ngb-tabset>
-	<!-- All Actions -->
-	<ngb-tab title="All">
-		<template ngbTabContent>
+<inline-trainer [globals]=globals></inline-trainer>
 
-			<ngb-accordion>
-				<ngb-panel *ngFor="let category of categories | keyValueFilter | topLevelCategory">
-					<template ngbPanelTitle>
-						<span (click)="category.value.open=!category.value.open" ngbPopover="{{category.value.description}}" container="body" placement="left" triggers="mouseenter:mouseleave">
-							<i *ngIf="!category.value.open" class="fa fa-chevron-right chevron" aria-hidden="true"></i>
-							<i *ngIf="category.value.open" class="fa fa-chevron-down chevron" aria-hidden="true"></i>
-							{{category.value.name}}
-						</span>
-					</template>
-					<template ngbPanelContent>
-						<ul class='list-unstyled'>
+  <div class='container-fluid'>
+  	<div class='row'>
+  		<div class='col'>
+  			<h1>171HIST-2A: Intro to History</h1>
+			<ol class="breadcrumb">
+			  <li class='breadcrumb-item'><a href (click)="false">Dashboard</a></li>
+			  <li class='breadcrumb-item'><a href (click)="false">Spring 2017</a></li>
+			  <li class='breadcrumb-item'><a href (click)="false">Registrar Courses</a></li>
+			  <li class='breadcrumb-item'><a href (click)="false">Arts and Sciences</a></li>
+			  <li class='breadcrumb-item'><a href (click)="false">History</a></li>
+			  <li *ngIf="router.url==='/course'" class="breadcrumb-item active">171HIST-2A</li>
+			  <li *ngIf="router.url!='/course'" class="breadcrumb-item" id='course_link'><a routerLink="/course">171HIST-2A</a></li>
+			  <li *ngIf="router.url!='/course'" class="breadcrumb-item active">{{routeName(router.url)}}</li>
 
-							<li *ngFor="let action of actions | actionCategory:category.value">
-								<a href='#'>{{action.name}}</a>
-							</li>
-							<li *ngFor="let subCategory of categories | keyValueFilter | childCategory:category">
-								<b (click)="subCategory.value.open=!subCategory.value.open" style='cursor:pointer;'><i *ngIf="!subCategory.value.open" class="fa fa-chevron-right chevron" aria-hidden="true"></i><i *ngIf="subCategory.value.open" class="fa fa-chevron-down chevron" aria-hidden="true"></i> {{subCategory.value.name}}</b>
-								<ul *ngIf="subCategory.value.open" class='list-unstyled'>
-									<li *ngFor="let action of actions | actionCategory:subCategory.value">
-										<action-button [action]=action [recent_actions]=recent_actions></action-button>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</template>
-				</ngb-panel>
-				<ngb-panel *ngIf="settings.showSearch">
-					<template ngbPanelTitle>
-						<span (click)="showSearch=!showSearch">
-							<i *ngIf="!showSearch" class="fa fa-chevron-right chevron" aria-hidden="true"></i>
-							<i *ngIf="showSearch" class="fa fa-chevron-down chevron" aria-hidden="true"></i>
-							Search
-						</span>
-					</template>
-					<template ngbPanelContent>
-						<input type='text' class='form-control form-control-sm' [(ngModel)]='search'>
-						<ul class='list-unstyled'>
-							<li *ngFor="let action of actions | actionSearch:search">
-								<action-button [action]=action [recent_actions]=recent_actions></action-button>
-							</li>
-							<li *ngIf="search.length===0">
-								<p class='form-text text-muted'>Use the box to search for actions.</p>
-							</li>
-							<li *ngIf="(actions | actionSearch:search).length===0 && search.length>0">
-								<p class='form-text text-muted'>No results for &quot;{{search}}&quot;.</p>
-							</li>
-						</ul>
-					</template>
-				</ngb-panel>
-			</ngb-accordion>
-		</template>
-	</ngb-tab>
+        <li class='pull-right'><button id='editing_button' class='btn btn-warning btn-sm' (click)="globals.editing=!globals.editing">Turn editing <span *ngIf="globals.editing">off</span><span *ngIf="!globals.editing">on</span></button></li>
+			</ol>
+  		</div>
+  	</div>
+  	<div class='row'>
+  		<div class='col-sm-3'>
+  			<div class="card">
+          <div class="card-header h6 card-inverse card-primary">
+            Course Tools
+          </div>
+          <div class="card-block">
+            <ul class='list-unstyled'>
+              <li><a href (click)="false">Hide Course</a></li>
+              <li><a href (click)="false">Enroll Users</a></li>
+              <li><a href (click)="false">Grades</a></li>
+              <li>&nbsp;</li>
+              <li><a href (click)="false">Get Course Syllabus</a></li>
+              <li><a routerLink="/syllabus" id='syllabus_link'>Upload Course Syllabus</a></li>
+              <li>&nbsp;</li>
+              <li><a href (click)="syllabus_public=!syllabus_public; false">Make Course Syllabus <span *ngIf="!syllabus_public">Public</span><span *ngIf="syllabus_public">Private</span></a></li>
+              <li *ngIf="syllabus_public"><a href (click)="false">Public Syllabus Link</a></li>
+              <li>&nbsp;</li>
+              <li>Roster: <a href (click)="false">Basic</a> | <a href (click)="false">Photo</a></li>
+              <li><a href (click)="false">Sort/Filter Forum Posts</a></li>
+            </ul>
+          </div>
+      </div>
 
-	<!-- Favorites -->
-	<ngb-tab title="Favorites">
-		<template ngbTabContent>
-			<ul  class='list-unstyled'>
-				<li *ngIf="(actions | favoriteActions).length===0">
-					<i>No favorites yet.</i>
-				</li>
-				<li  *ngFor="let action of actions | favoriteActions">
-					<action-button [action]=action [recent_actions]=recent_actions></action-button>
-				</li>
-			</ul>
-		</template>
-	</ngb-tab>
+      <div class="card course-navigation">
+        <div class="card-header h6 card-inverse card-primary">
+        Navigation
+        </div>
+        <div class="card-block">
+          <ul>
+            <li class='list-unstyled'><a href (click)="false">Dashboard</a></li>
+            <li><a href (click)="false">Site Home</a></li>
+            <li>Site Pages</li>
+            <li>
+              Current Course
+              <ul>
+                <li>
+                  <a href (click)="false">Intro to History</a>
+                  <ul>
+                    <li><a href (click)="false">Participants</a></li>
+                    <li>General</li>
+                    <li>Week 1</li>
+                    <li>Week 2</li>
+                    <li>Week 3</li>
+                    <li>Week 4</li>
+                    <li>Week 5</li>
+                    <li>Week 6</li>
+                    <li>Week 7</li>
+                    <li>Week 8</li>
+                    <li>Week 9</li>
+                    <li>Week 10</li>
+                    <li>Week 11</li>
+                    <li>Week 12</li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-	<!-- Recently Used -->
+    <div class="card" id='administration_block'>
+        <div class="card-header h6 card-inverse card-primary">
+        Administration
+        </div>
+        <div class="card-block">
+          <ul class='list-unstyled'>
+            <li>
+              Course Utilities
+              <ul class='fa-ul'>
+                <li>
+                  <i class="fa fa-li fa-pencil"></i>
+                  <a href (click)="globals.editing=!globals.editing; false">
+                    Turn editing
+                    <span *ngIf="globals.editing">off</span>
+                    <span *ngIf="!globals.editing">on</span>
+                  </a>
+                </li>
+                <li [attr.id]="utility.id" *ngFor="let utility of course_utilties">
+                  <span *ngIf="!utility.children">
+                    <i class="fa fa-li fa-{{utility.icon}}"></i>
+                    <a *ngIf="!utility.view" href (click)="false">{{utility.name}}</a>
+                    <a *ngIf="utility.view" routerLink="{{utility.view}}">{{utility.name}}</a>
+                  </span>
+                  <span *ngIf="utility.children" (click)="utility.show=!utility.show">
+                    <i class='fa fa-li' [ngClass]="{'fa-caret-down':utility.show, 'fa-caret-right':!utility.show}"></i>
+                    <a href (click)="false">{{utility.name}}</a>
+                  </span>
+                  <ul *ngIf="utility.children && utility.show" class='fa-ul'>
+                    <li *ngFor="let child of utility.children">
+                      <i class="fa fa-li fa-{{child.icon}}"></i>
+                      <a *ngIf="!child.view" href (click)="false">{{child.name}}</a>
+                      <a *ngIf="child.view" routerLink="{{child.view}}">{{child.name}}</a>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
 
-	<ngb-tab title="Recents">
-		<template ngbTabContent>
-			<i *ngIf="recent_actions.actions.length==0">No recent actions</i>
-			<ul class='list-unstyled'>
-				<li *ngFor="let action of recent_actions.actions">
-					<action-button [action]=action [recent_actions]=recent_actions></action-button>
-				</li>
-			</ul>
+  	
 
-		</template>
-	</ngb-tab>
+      <div class="card" id='add_block' *ngIf="globals.editing">
+        <div class="card-header h6 card-inverse card-primary">
+          Add a Block
+        </div>
+        <div class="card-block">
+         
+        <select class='form-control' (change)="addBlock($event)">
+          <option value="">Add...</option>
+          <option value="accessibility">Accessibility</option>
+          <option value="activity_modules">Activities</option>
+          <option value="activity_results">Activity results</option>
+          <option value="attendance">Attendance</option>
+          <option value="calendar" *ngIf="!globals.blocks.calendar">Calendar</option>
+          <option value="comments">Comments</option>
+          <option value="configurable_reports">Configurable Reports</option>
+          <option value="explorancebpi">Course Evaluations Block</option>
+          <option value="meeting_times">Course Meeting Times</option>
+          <option value="course_summary">Course/site summary</option>
+          <option value="course_list">Courses</option>
+          <option value="feedback">Feedback</option>
+          <option value="globalsearch">Global search</option>
+          <option value="html">HTML</option>
+          <option value="instructors">Instructors</option>
+          <option value="latte_resources">LATTE Resources</option>
+          <option value="moodle_media">LATTE Videos block</option>
+          <option value="lp">Learning plans</option>
+          <option value="massaction">Mass Actions</option>
+          <option value="my_courses">My Courses</option>
+          <option value="online_users">Online users</option>
+          <option value="participants">People</option>
+          <option value="progress">Progress Bar</option>
+          <option value="quickmail">Quickmail</option>
+          <option value="glossary_random">Random glossary entry</option>
+          <option value="rss_client">Remote RSS feeds</option>
+          <option value="section_links">Section links</option>
+          <option value="selfcompletion">Self completion</option>
+          <option value="support_staff_enrollments">Support Enroll</option>
+          <option value="support_staff_unenroll">Support Unenroll</option></select>
 
-	
+        </div>
+      </div>
+
+      <div class="card" id='calendar' *ngIf="globals.blocks.calendar">
+        <div class="card-header h6 card-inverse card-primary">
+        	Calendar
+        </div>
+        <div class="card-block">
+         
+        <table class='table table-sm' >
+<thead>
+  <tr>
+    <th colspan=8 class='text-center'>March 2017</th>
+  </tr>
+</thead>
+<tbody>
+<tr>
+<th scope="col">S</th>
+<th scope="col">M</th>
+<th scope="col">T</th>
+<th scope="col">W</th>
+<th scope="col">T</th>
+<th scope="col">F</th>
+<th scope="col">S</th>
+</tr>
+<tr>
+<td></td><td></td><td></td><td>1</td><td>2</td><td>3</td><td>4</td></tr><tr><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr><tr><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td>18</td></tr><tr><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td>24</td><td>25</td></tr><tr>
+<td>26</td>
+<td>27</td>
+<td>28</td>
+<td>29</td>
+<td>30</td>
+<td>31</td>
+</tr>
+</tbody>
+</table>
+      </div>
+      </div>
+
+
+  		</div>
+
+
+  		<!-- COURSE PAGE -->
+  		<div class='col-sm-9'>
+  			<router-outlet></router-outlet>
+  		</div>
+  		
+  		
 
 
 
-</ngb-tabset>
 
+  	</div>
+  </div>

@@ -6,6 +6,25 @@ import {Category} from './category';
 
 import {Step} from './step';
 
+import {HINT} from './tour_components/hint';
+import {SLIDE} from './tour_components/slide';
+import {UNBLOCK_ELEMENT} from './tour_components/unblock_element';
+
+var showHint = function (target, trainer?){
+	if(!trainer){
+		trainer='#trainer';
+	}
+	SLIDE(target, function(){
+		UNBLOCK_ELEMENT(trainer, target,function(){
+			HINT(target);
+		});
+	});
+	
+	
+}
+
+
+
 
 function assembleActions(collection:Action[], categories, actions, extras={}){
 	for(var i=0; i<actions.length; i++){
@@ -34,24 +53,49 @@ assembleActions(actions,[CATEGORIES['course_settings']],[
 	"Upload course syllabus"
 	],{
 		steps:[
-		{text:"Navigate to course page"},
-		{text:"Click \"Upload Course Syllabus\""},
-		{text:"Browse for your syllabus"},
-		{text:"Click \"Upload\""}
+		{text:"Navigate to course page", help:function(){
+			showHint('#course_link');
+		}},
+		{text:"Click \"Upload Course Syllabus\"", help:function(){
+			showHint('#syllabus_link');
+		}},
+		{text:"Browse for your syllabus", help:function(){
+			showHint('#syllabus_form');
+		}},
+		{text:"Click \"Upload\"", help:function(){
+			showHint('#syllabus_upload');
+		}}
 		],
 		help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus"
 	});
 
-assembleActions(actions,[CATEGORIES['course_settings']],[
-	'Set course date'
-	]);
+// assembleActions(actions,[CATEGORIES['course_settings']],[
+// 	'Set course date'
+// 	]);
 
 assembleActions(actions,[CATEGORIES['course_settings'],CATEGORIES['organize']],[
-	'Change course format',
+	'Present Course on LATTE',
 	]);
 
 assembleActions(actions,[CATEGORIES['calendar']],[
-	'Set up calendar',
+	"Set up calendar"
+	],{
+		steps:[
+		{text:"Click \"Turn editing on.\"",
+		help:function(){
+			showHint('#editing_button');
+		}},
+		{
+			text:"Scroll to the \"Add a Block\" block on the left side of the screen and select \"Calendar\" from the dropdown menu.",
+			help:function(){
+				showHint('#add_block');
+			}
+		}
+		]
+	});
+
+
+assembleActions(actions,[CATEGORIES['calendar']],[
 	'Add entry to calendar',
 	]);
 

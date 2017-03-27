@@ -1,0 +1,100 @@
+<div class="card" id='trainer'>
+        <div class="card-header h6 card-inverse card-primary">
+          Inline Trainer
+        </div>
+        <div class="card-block" style='height:90%;'>
+
+<ngb-tabset>
+	<!-- All Actions -->
+	<ngb-tab title="All">
+		<template ngbTabContent>
+
+			<ngb-accordion>
+				<ngb-panel *ngFor="let category of categories | keyValueFilter | topLevelCategory">
+					<template ngbPanelTitle>
+						<span (click)="category.value.open=!category.value.open" ngbPopover="{{category.value.description}}" container="body" placement="left" triggers="mouseenter:mouseleave">
+							<i *ngIf="!category.value.open" class="fa fa-chevron-right chevron" aria-hidden="true"></i>
+							<i *ngIf="category.value.open" class="fa fa-chevron-down chevron" aria-hidden="true"></i>
+							{{category.value.name}} {{test}}
+						</span>
+					</template>
+					<template ngbPanelContent>
+						<ul class='list-unstyled'>
+
+							<li *ngFor="let action of actions | actionCategory:category.value">
+								<a href='#'>{{action.name}}</a>
+							</li>
+							<li style='margin-left:4px;' *ngFor="let subCategory of categories | keyValueFilter | childCategory:category">
+								<a href (click)="subCategory.value.open=!subCategory.value.open; false" style='cursor:pointer;'><i *ngIf="!subCategory.value.open" class="fa fa-chevron-right chevron" aria-hidden="true"></i><i *ngIf="subCategory.value.open" class="fa fa-chevron-down chevron" aria-hidden="true"></i> {{subCategory.value.name}}</a>
+								<ul *ngIf="subCategory.value.open" class='list-unstyled'>
+									<li *ngFor="let action of actions | actionCategory:subCategory.value">
+										<action-button [action]=action [recent_actions]=recent_actions></action-button>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</template>
+				</ngb-panel>
+				<ngb-panel *ngIf="settings.showSearch">
+					<template ngbPanelTitle>
+						<span (click)="showSearch=!showSearch">
+							<i *ngIf="!showSearch" class="fa fa-chevron-right chevron" aria-hidden="true"></i>
+							<i *ngIf="showSearch" class="fa fa-chevron-down chevron" aria-hidden="true"></i>
+							Search
+						</span>
+					</template>
+					<template ngbPanelContent>
+						<input type='text' class='form-control form-control-sm' [(ngModel)]='search'>
+						<ul class='list-unstyled'>
+							<li *ngFor="let action of actions | actionSearch:search">
+								<action-button [action]=action [recent_actions]=recent_actions></action-button>
+							</li>
+							<li *ngIf="search.length===0">
+								<p class='form-text text-muted'>Use the box to search for actions.</p>
+							</li>
+							<li *ngIf="(actions | actionSearch:search).length===0 && search.length>0">
+								<p class='form-text text-muted'>No results for &quot;{{search}}&quot;.</p>
+							</li>
+						</ul>
+					</template>
+				</ngb-panel>
+			</ngb-accordion>
+		</template>
+	</ngb-tab>
+
+	<!-- Favorites -->
+	<ngb-tab title="Favorites">
+		<template ngbTabContent>
+			<ul  class='list-unstyled'>
+				<li *ngIf="(actions | favoriteActions).length===0">
+					<i>No favorites yet.</i>
+				</li>
+				<li  *ngFor="let action of actions | favoriteActions">
+					<action-button [action]=action [recent_actions]=recent_actions></action-button>
+				</li>
+			</ul>
+		</template>
+	</ngb-tab>
+
+	<!-- Recently Used -->
+
+	<ngb-tab title="Recents">
+		<template ngbTabContent>
+			<i *ngIf="recent_actions.actions.length==0">No recent actions</i>
+			<ul class='list-unstyled'>
+				<li *ngFor="let action of recent_actions.actions">
+					<action-button [action]=action [recent_actions]=recent_actions></action-button>
+				</li>
+			</ul>
+
+		</template>
+	</ngb-tab>
+
+	
+
+
+
+</ngb-tabset>
+
+  </div>
+      </div>

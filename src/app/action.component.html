@@ -1,13 +1,13 @@
 <div class='action'>
-	<a href='#' (click)="click_handler()"><i *ngIf="!action.shown" class="fa fa-chevron-right chevron" aria-hidden="true"></i><i *ngIf="action.shown" class="fa fa-chevron-down chevron" aria-hidden="true"></i> {{action.name}}</a>
+	<a (click)="click_handler($event)" href='#'><i *ngIf="!action.shown" class="fa fa-chevron-right chevron" aria-hidden="true"></i><i *ngIf="action.shown" class="fa fa-chevron-down chevron" aria-hidden="true"></i> {{action.name}}</a>
 	<div class='pull-right icons'>
 		<a class='star pull-right' (click)="action.favorite=false" *ngIf="action.favorite"><i class="fa fa-star star" aria-hidden="true"></i></a>
 		<a class='star pull-right' (click)="action.favorite=true" *ngIf="!action.favorite"><i class="fa fa-star-o star" aria-hidden="true"></i></a>
-		<a href='{{action.help}}' target='_blank' class='pull-right'><i class='fa fa-info-circle' aria-hidden="true"></i></a>
+		<a href='{{action.help}}' target='_blank' class='pull-right'><i class='fa fa-info' aria-hidden="true"></i></a>
 	</div>
 	<ol *ngIf="action.shown">
 		<li *ngFor="let step of action.steps">
-			<a href='#'><i class="fa fa-question-circle" aria-hidden="true"></i></a> {{step.text}} 
+			<a *ngIf="step.help!=null" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a> {{step.text}} 
 		</li>
 	</ol>
 	
