@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 import {CATEGORIES} from './categories';
 
@@ -10,18 +10,20 @@ import {HELPERS} from './helpers';
 
 import {RecentActionsService} from './recent-actions.service';
 
-import {Router} from '@angular/router';
+import {Router, NavigationEnd} from '@angular/router';
 
 import {COURSE_UTILITIES} from './course-utilities';
 
 var routeLabels={
-	syllabus:'Syllabus'
+	syllabus:'Syllabus',
+	calendar: 'Calendar',
+	new_event: 'Calendar'
 };
 
 var globals={
-	editing:false,
+	editing:true,
 	blocks:{
-		calendar:false
+		calendar:true
 	}
 };
 
@@ -42,6 +44,7 @@ var globals={
 	
 	constructor(private _router: Router ) {
 	  this.router = _router;
+	  
 	}
 
 	routeName(route){
@@ -53,6 +56,15 @@ var globals={
 		console.log(block);
 		this.globals.blocks[block]=true;
 	}
+
+	ngOnInit() {
+        this.router.events.subscribe((evt) => {
+            if (!(evt instanceof NavigationEnd)) {
+                return;
+            }
+            window.scrollTo(0, 0)
+        });
+    }
 
 }
 

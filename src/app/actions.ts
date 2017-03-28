@@ -73,20 +73,20 @@ assembleActions(actions,[CATEGORIES['course_settings']],[
 // 	'Set course date'
 // 	]);
 
-assembleActions(actions,[CATEGORIES['course_settings'],CATEGORIES['organize']],[
-	'Present Course on LATTE',
+assembleActions(actions,[CATEGORIES['organize']],[
+	'Change Course Layout',
 	]);
 
 assembleActions(actions,[CATEGORIES['calendar']],[
 	"Set up calendar"
 	],{
 		steps:[
-		{text:"Click \"Turn editing on.\"",
+		{text:"Click \"Turn editing on\"",
 		help:function(){
 			showHint('#editing_button');
 		}},
 		{
-			text:"Scroll to the \"Add a Block\" block on the left side of the screen and select \"Calendar\" from the dropdown menu.",
+			text:"Scroll to the \"Add a Block\" block on the left side of the screen and select \"Calendar\" from the dropdown menu",
 			help:function(){
 				showHint('#add_block');
 			}
@@ -97,7 +97,54 @@ assembleActions(actions,[CATEGORIES['calendar']],[
 
 assembleActions(actions,[CATEGORIES['calendar']],[
 	'Add entry to calendar',
-	]);
+	],
+	{
+		steps:[
+			{
+				text:"Scroll to the \"Calendar\" block on the left side of the screen and click the name of the current month",
+				help:function(){
+					showHint('#calendar');
+				}
+			},
+			{
+				text:"Click \"New Event\"",
+				help:function(){
+					showHint('#new_event_button');
+				}
+			},
+			{
+				text:"Change \"Type of event\" to \"Course\"",
+				help:function(){
+					showHint('#event_type');
+				}
+			},
+			{
+				text:"Type your event's title in \"Event Title\"",
+				help:function(){
+					showHint('#event_title');
+				}
+			},
+			{
+				text:"Type your event's description in \"Description\"",
+				help:function(){
+					showHint('#event_description');
+				},
+				optional:true
+			},
+			{
+				text:"Type your event's date and time in \"Date\"",
+				help:function(){
+					showHint('#event_date');
+				}
+			},
+			{
+				text:"Click \"Save Changes\"",
+				help:function(){
+					showHint('#save_event'); 
+				}
+			}
+		]
+	});
 
 assembleActions(actions,[CATEGORIES['users']],[
 	'Add students',

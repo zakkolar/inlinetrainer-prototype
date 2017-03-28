@@ -5,9 +5,10 @@
 		<a class='star pull-right' (click)="action.favorite=true" *ngIf="!action.favorite"><i class="fa fa-star-o star" aria-hidden="true"></i></a>
 		<a href='{{action.help}}' target='_blank' class='pull-right'><i class='fa fa-info' aria-hidden="true"></i></a>
 	</div>
-	<ol *ngIf="action.shown">
-		<li *ngFor="let step of action.steps">
-			<a *ngIf="step.help!=null" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a> {{step.text}} 
+	<ol *ngIf="action.shown" class='steps'>
+		<li *ngFor="let step of action.steps" [ngClass]="{'optional':step.optional}">
+			<a *ngIf="step.help!=null" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+			<span *ngIf="step.optional">Optional: </span>{{step.text}} 
 		</li>
 	</ol>
 	

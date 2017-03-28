@@ -6,7 +6,7 @@ import { AppComponent }  from './app.component';
 import { ActionComponent } from './action.component';
 import { InlineTrainerComponent } from './inline-trainer.component';
 
-import {SyllabusComponent, CourseComponent} from './page.component';
+import {SyllabusComponent, CourseComponent, CalendarComponent, NewEventComponent} from './pages/page.component';
 
 import { FormsModule }    from '@angular/forms';
 
@@ -22,6 +22,8 @@ import {FavoriteActionsPipe} from './favorite-actions.pipe';
 const appRoutes: Routes = [
   { path: 'syllabus', component: SyllabusComponent },
   { path: 'course', component: CourseComponent, },
+  { path: 'calendar', component: CalendarComponent, },
+  { path: 'new_event', component: NewEventComponent, },
   { path: '',   redirectTo: '/course', pathMatch: 'full' },
 ];
 
@@ -33,7 +35,7 @@ const appRoutes: Routes = [
 
 @NgModule({
   imports:      [ BrowserModule, NgbModule.forRoot(), FormsModule, RouterModule.forRoot(appRoutes) ],
-  declarations: [ AppComponent, ActionComponent, InlineTrainerComponent, SyllabusComponent, CourseComponent, KeyValueFilterPipe, ActionCategoryPipe, ActionSearchPipe, TopLevelCategoryPipe, ChildCategoryPipe, FavoriteActionsPipe ],
+  declarations: [ AppComponent, ActionComponent, InlineTrainerComponent, SyllabusComponent, CalendarComponent, CourseComponent, NewEventComponent, KeyValueFilterPipe, ActionCategoryPipe, ActionSearchPipe, TopLevelCategoryPipe, ChildCategoryPipe, FavoriteActionsPipe ],
   bootstrap:    [ AppComponent ]
 })
 
