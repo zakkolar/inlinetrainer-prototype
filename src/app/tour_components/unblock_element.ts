@@ -44,7 +44,6 @@ export const UNBLOCK_ELEMENT = function(blocker_selector, blockee_selector, comp
 		let right_space = $(document).width() - blockee_offset.right;
 
 		if(right_space>left_space){
-			console.log(blockee_offset.right);
 			blocker_offset.left = blockee_offset.right+padding;
 		}
 		else{
