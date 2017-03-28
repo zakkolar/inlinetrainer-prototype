@@ -64,7 +64,14 @@ assembleActions(actions,[CATEGORIES['course_settings']],[
 		}},
 		{text:"Click \"Upload\"", help:function(){
 			showHint('#syllabus_upload');
-		}}
+		}},
+		{
+			text:"Click \"Make Course Syllabus Public\" to show your syllabus in the public syllabus directory",
+			help:function(){
+				showHint('#course_syllabus_public');
+			},
+			optional:true
+		}
 		],
 		help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus"
 	});
