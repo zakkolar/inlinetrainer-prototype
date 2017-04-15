@@ -1,11 +1,11 @@
 import {GUID} from './guid';
-export const CompleteOnEvent = function(event,target,callback){
+export const WatchForEvent = function(event:string,target:string,callback:Function){
 	let $ = require('jquery');
 	let id = "zk"+GUID();
 	setTimeout(function(){
 		$(target).on(event+'.'+id,function(){
 			callback();
-			$(target).off('change.'+id);
+			$(target).off(event+'.'+id);
 		});
 	},100);
 	

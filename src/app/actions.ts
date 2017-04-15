@@ -14,10 +14,11 @@ import {GUID} from './helpers/guid';
 
 import {ShowHint} from './helpers/show-hint';
 
-import {CompleteOnEvent} from './helpers/complete-on-event';
+import {WatchForEvent} from './helpers/watch-for-event';
 
 
 var showHint = ShowHint;
+
 
 function assembleActions(collection:Action[], categories, actions, extras={}){
 	for(let action of actions){
@@ -46,12 +47,17 @@ let actions:Action[]=[];
 // }
 
 
+
+
+import {UploadCourseSyllabusAction} from './actions/course-setup/sharing-course-information/upload-course-syllabus.action';
+actions.push(UploadCourseSyllabusAction);
+
+import {SetUpCalendarAction} from './actions/course-setup/course-calendar/set-up-calendar.action';
+actions.push(SetUpCalendarAction);
+
 assembleActions(actions,[CATEGORIES['old_courses']],[
 	"Reuse an existing course",
 	]);
-
-import {UploadCourseSyllabus} from './actions/course-setup/sharing-course-information/upload-course-syllabus.action';
-actions.push(UploadCourseSyllabus);
 
 // assembleActions(actions,[CATEGORIES['course_settings']],[
 // 	'Set course date'

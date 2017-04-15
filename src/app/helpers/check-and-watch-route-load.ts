@@ -1,5 +1,5 @@
 import {OnRouteLoad} from './on-route-load';
-export const CheckAndWatchRoute=function(route, callback){
+export const CheckAndWatchRouteLoad=function(route, callback){
 	if(window.location.pathname===route){
 		callback();
 	}

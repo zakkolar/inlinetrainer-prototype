@@ -53,7 +53,6 @@ var globals={
 
 	addBlock(event){
 		var block = event.target.value;
-		console.log(block);
 		this.globals.blocks[block]=true;
 	}
 

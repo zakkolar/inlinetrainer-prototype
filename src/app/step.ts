@@ -12,8 +12,8 @@ export class Step{
 	constructor(params){
 		this.text = params.text || null;
 		this._complete = false;
-		this._watchCompleteFunction = params.watchComplete || function(){};
-		this._watchUncompleteFunction = params.watchUncomplete || function(){};
+		this._watchCompleteFunction = params.watchComplete || function(callback){};
+		this._watchUncompleteFunction = params.watchUncomplete || function(callback){};
 		this.help = params.help || null;
 		this.optional = params.optional || false;
 		this._prerequisites = params.prerequisites || new Array<Step>();
@@ -40,8 +40,6 @@ export class Step{
 
 	watchComplete(){
 		let step = this;
-		
-
 		let afterPrerequisites = function(){
 			if(step.prerequisitesComplete()){
 				step._watchCompleteFunction(function(){

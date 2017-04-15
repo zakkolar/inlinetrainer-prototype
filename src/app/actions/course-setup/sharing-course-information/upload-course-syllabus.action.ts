@@ -4,8 +4,8 @@ import {CATEGORIES} from '../../../categories';
 
 import {Step} from '../../../step';
 import {ShowHint} from '../../../helpers/show-hint';
-import {CheckAndWatchRoute} from '../../../helpers/check-and-watch-route';
-import {CompleteOnEvent} from '../../../helpers/complete-on-event';
+import {CheckAndWatchRouteLoad} from '../../../helpers/check-and-watch-route-load';
+import {WatchForEvent} from '../../../helpers/watch-for-event';
 
 var steps={};
 	steps['course_page']=new Step({
@@ -14,7 +14,7 @@ var steps={};
 				ShowHint('#course_link');
 			},
 			watchComplete:function(callback){
-				CheckAndWatchRoute('/course',callback);
+				CheckAndWatchRouteLoad('/course',callback);
 			}
 		});
 	steps['syllabus_page']=new Step({
@@ -23,7 +23,7 @@ var steps={};
 				ShowHint('#syllabus_link');
 			},
 			watchComplete:function(callback){
-				CheckAndWatchRoute('/syllabus',callback);
+				CheckAndWatchRouteLoad('/syllabus',callback);
 				}
 		});
 	steps['browse']=new Step({
@@ -33,7 +33,7 @@ var steps={};
 			},
 			prerequisites:[steps['syllabus_page']],
 			watchComplete:function(callback){
-				CompleteOnEvent('change','#syllabus',callback);
+				WatchForEvent('change','#syllabus',callback);
 			}	
 		});
 	steps['upload']=new Step({
@@ -43,7 +43,7 @@ var steps={};
 			},
 			prerequisites:[steps['browse']],
 			watchComplete:function(callback){
-				CompleteOnEvent('click','#syllabus_upload',callback);
+				WatchForEvent('click','#syllabus_upload',callback);
 			}
 		});
 	steps['public']=new Step({
@@ -52,7 +52,10 @@ var steps={};
 				ShowHint('#course_syllabus_public');
 			},
 			optional:true,
-			prerequisites:[steps['upload']]
+			prerequisites:[steps['upload']],
+			watchComplete:function(callback){
+				WatchForEvent('click','#course_syllabus_public',callback);
+			}
 		});
 
 
@@ -60,7 +63,7 @@ var steps={};
 
 
 
-export const UploadCourseSyllabus:Action = new Action({
+export const UploadCourseSyllabusAction:Action = new Action({
 	name: "Upload course syllabus",
 	categories: [CATEGORIES['course_settings']],
 	steps:[steps['course_page'], steps['syllabus_page'], steps['browse'], steps['upload'], steps['public']],
