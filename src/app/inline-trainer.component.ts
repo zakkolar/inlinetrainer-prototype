@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, AfterViewInit } from '@angular/core';
 
 import {CATEGORIES} from './categories';
 
 import {ACTIONS} from './actions';
+
+import {Action} from './action';
 
 import {SETTINGS} from './settings';
 
@@ -36,15 +38,21 @@ for(var category in CATEGORIES){
 
 
 
-export class InlineTrainerComponent  {
+export class InlineTrainerComponent implements AfterViewInit  {
 	categories=CATEGORIES;
-	actions=ACTIONS;
+	actions:Action[]=ACTIONS;
 
 	settings=SETTINGS;
 
 	subcategories=subcategories;
 
 	recent_actions = new RecentActionsService();
+
+	ngAfterViewInit(){
+		for(let action of this.actions){
+			action.initSteps();
+		}
+	}
 
 	
 

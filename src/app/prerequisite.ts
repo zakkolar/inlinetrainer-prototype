@@ -1,5 +1,5 @@
-import {Action} from './action';
+import {Step} from './step';
 export class Prerequisite{
-	action: Action;
-	text: string;
+	step: Step;
+	
 }

@@ -10,71 +10,48 @@ import {HINT} from './tour_components/hint';
 import {SLIDE} from './tour_components/slide';
 import {UNBLOCK_ELEMENT} from './tour_components/unblock_element';
 
-var showHint = function (target, trainer?){
-	if(!trainer){
-		trainer='#trainer';
-	}
-	SLIDE(target, function(){
-		UNBLOCK_ELEMENT(trainer, target,function(){
-			HINT(target);
-		});
-	});
-	
-	
-}
+import {GUID} from './helpers/guid';
+
+import {ShowHint} from './helpers/show-hint';
+
+import {CompleteOnEvent} from './helpers/complete-on-event';
 
 
-
+var showHint = ShowHint;
 
 function assembleActions(collection:Action[], categories, actions, extras={}){
-	for(var i=0; i<actions.length; i++){
-		var action = {
-			name:actions[i],
+	for(let action of actions){
+		let newAction = new Action({
+			name:action,
 			categories:categories,
-			favorite:false,
-			shown:false,
-			steps:[],
-			help:""
-		};
-		for(var j in extras){
-			action[j]=extras[j];
-		}
-		collection.push(action);
+			steps:extras['steps'],
+			help: extras['help'],
+		});
+		// collection.push(newAction);
 	}
 }
 
 let actions:Action[]=[];
 
+
+
+
+// let completeOnEvent=function(event,target,callback){
+// 	let $ = require('jquery');
+// 	let id = "zk"+GUID();
+// 	$(target).on(event+'.'+id,function(){
+// 		callback();
+// 		$(target).off('change.'+id);
+// 	});
+// }
+
+
 assembleActions(actions,[CATEGORIES['old_courses']],[
 	"Reuse an existing course",
 	]);
 
-assembleActions(actions,[CATEGORIES['course_settings']],[
-	"Upload course syllabus"
-	],{
-		steps:[
-		{text:"Navigate to course page", help:function(){
-			showHint('#course_link');
-		}},
-		{text:"Click \"Upload Course Syllabus\"", help:function(){
-			showHint('#syllabus_link');
-		}},
-		{text:"Browse for your syllabus", help:function(){
-			showHint('#syllabus_form');
-		}},
-		{text:"Click \"Upload\"", help:function(){
-			showHint('#syllabus_upload');
-		}},
-		{
-			text:"Click \"Make Course Syllabus Public\" to show your syllabus in the public syllabus directory",
-			help:function(){
-				showHint('#course_syllabus_public');
-			},
-			optional:true
-		}
-		],
-		help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus"
-	});
+import {UploadCourseSyllabus} from './actions/course-setup/sharing-course-information/upload-course-syllabus.action';
+actions.push(UploadCourseSyllabus);
 
 // assembleActions(actions,[CATEGORIES['course_settings']],[
 // 	'Set course date'
@@ -88,16 +65,18 @@ assembleActions(actions,[CATEGORIES['calendar']],[
 	"Set up calendar"
 	],{
 		steps:[
-		{text:"Click \"Turn editing on\"",
-		help:function(){
-			showHint('#editing_button');
-		}},
-		{
-			text:"Scroll to the \"Add a Block\" block on the left side of the screen and select \"Calendar\" from the dropdown menu",
-			help:function(){
-				showHint('#add_block');
-			}
-		}
+			new Step({
+				text:"Click \"Turn editing on\"",
+				help:function(){
+					showHint('#editing_button');
+				}
+			}),
+			new Step({
+				text:"Scroll to the \"Add a Block\" block on the left side of the screen and select \"Calendar\" from the dropdown menu",
+				help:function(){
+					showHint('#add_block');
+				}
+			})
 		]
 	});
 
@@ -107,49 +86,49 @@ assembleActions(actions,[CATEGORIES['calendar']],[
 	],
 	{
 		steps:[
-			{
+			new Step({
 				text:"Scroll to the \"Calendar\" block on the left side of the screen and click the name of the current month",
 				help:function(){
 					showHint('#calendar');
 				}
-			},
-			{
+			}),
+			new Step({
 				text:"Click \"New Event\"",
 				help:function(){
 					showHint('#new_event_button');
 				}
-			},
-			{
+			}),
+			new Step({
 				text:"Change \"Type of event\" to \"Course\"",
 				help:function(){
 					showHint('#event_type');
 				}
-			},
-			{
+			}),
+			new Step({
 				text:"Type your event's title in \"Event Title\"",
 				help:function(){
 					showHint('#event_title');
 				}
-			},
-			{
+			}),
+			new Step({
 				text:"Type your event's description in \"Description\"",
 				help:function(){
 					showHint('#event_description');
 				},
 				optional:true
-			},
-			{
+			}),
+			new Step({
 				text:"Type your event's date and time in \"Date\"",
 				help:function(){
 					showHint('#event_date');
 				}
-			},
-			{
+			}),
+			new Step({
 				text:"Click \"Save Changes\"",
 				help:function(){
 					showHint('#save_event'); 
 				}
-			}
+			})
 		]
 	});
 

@@ -21,9 +21,9 @@ var routeLabels={
 };
 
 var globals={
-	editing:true,
+	editing:false,
 	blocks:{
-		calendar:true
+		calendar:false
 	}
 };
 
