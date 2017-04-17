@@ -1,6 +1,10 @@
 import {GUID} from './guid';
-export const OnRouteLoad=function(pathname,callback){
-	let id = GUID();
+
+function makeEventString(id){
+	return 'popstate.'+id+' pushstate.'+id;
+}
+
+export const OnRouteLoad=function(pathname,id,callback){
 
 	let $ = require('jquery');
 
@@ -11,10 +15,14 @@ export const OnRouteLoad=function(pathname,callback){
 	};
 
 
-	$(window).on('popstate.zk-'+id+' pushstate.zk-'+id,function(){
+	$(window).on(makeEventString(id),function(){
 		if(window.location.pathname===pathname){
 			callback();
-			$(window).off('popstate.zk-'+id+' pushstate.zk-'+id);
 		}
 	});
 };
+
+export const OffRouteLoad=function(id){
+	let $ = require('jquery');
+	$(window).off(makeEventString(id));
+}

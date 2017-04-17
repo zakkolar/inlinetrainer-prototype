@@ -7,10 +7,12 @@
 	</div>
 	<ol *ngIf="action.shown" class='steps'>
 		<li *ngFor="let step of action.steps" [ngClass]="{'optional':step.optional,'complete':step.complete, 'futureStep':!step.complete && step!==action.currentStep}">
-			
-			<span *ngIf="step.optional">Optional: </span>{{step.text}} <a *ngIf="step.help!=null && step===action.currentStep" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+
+			<span *ngIf="step.optional">Optional: </span>{{step.text}}
+      <a *ngIf="step.help!=null && step===action.currentStep" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
+      <!-- <a *ngIf="step===action.currentStep" class='success' (click)="step.complete=true"><i class="fa fa-check" aria-hidden="true"></i></a> -->
 		</li>
 	</ol>
-	
-	
+
+
 </div>

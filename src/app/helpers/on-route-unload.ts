@@ -1,20 +1,26 @@
 import {GUID} from './guid';
-export const OnRouteUnload=function(pathname,callback){
-	let id = GUID();
 
+function makeEventString(id){
+	return 'popstate.'+id+' pushstate.'+id;
+}
+
+export const OnRouteUnload=function(pathname:string, id:string,callback:Function){
 	let $ = require('jquery');
 
 	var pushState = history.pushState;
 	history.pushState = function () {
 	    pushState.apply(history, arguments);
-	    $(window).trigger('pushstate', arguments);  // Some event-handling function
+	    $(window).trigger('pushstate', arguments); 
 	};
 
-
-	$(window).on('popstate.zk-'+id+' pushstate.zk-'+id,function(){
+	$(window).on(makeEventString(id),function(){
 		if(window.location.pathname!==pathname){
 			callback();
-			$(window).off('popstate.zk-'+id+' pushstate.zk-'+id);
 		}
 	});
 };
+
+export const OffRouteUnload=function(id:string){
+	let $ = require('jquery');
+	$(window).off(makeEventString(id));
+}

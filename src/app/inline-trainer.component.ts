@@ -52,6 +52,9 @@ export class InlineTrainerComponent implements AfterViewInit  {
 		for(let action of this.actions){
 			action.initSteps();
 		}
+
+		
+
 	}
 
 	

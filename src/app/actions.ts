@@ -53,7 +53,7 @@ import {UploadCourseSyllabusAction} from './actions/course-setup/sharing-course-
 actions.push(UploadCourseSyllabusAction);
 
 import {SetUpCalendarAction} from './actions/course-setup/course-calendar/set-up-calendar.action';
-actions.push(SetUpCalendarAction);
+// actions.push(SetUpCalendarAction);
 
 assembleActions(actions,[CATEGORIES['old_courses']],[
 	"Reuse an existing course",
@@ -132,7 +132,7 @@ assembleActions(actions,[CATEGORIES['calendar']],[
 			new Step({
 				text:"Click \"Save Changes\"",
 				help:function(){
-					showHint('#save_event'); 
+					showHint('#save_event');
 				}
 			})
 		]

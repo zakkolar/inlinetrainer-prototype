@@ -1,12 +1,18 @@
-import {GUID} from './guid';
-export const WatchForEvent = function(event:string,target:string,callback:Function){
+function makeEventString(event,id){
+	return event+'.'+id;
+}
+export const WatchForEvent = function(event:string,target:string ,id:string,callback:Function){
 	let $ = require('jquery');
-	let id = "zk"+GUID();
+
 	setTimeout(function(){
-		$(target).on(event+'.'+id,function(){
+		$(target).on(makeEventString(event,id),function(e){
 			callback();
-			$(target).off(event+'.'+id);
 		});
 	},100);
-	
+
+}
+
+export const UnwatchForEvent = function(event:string,target:string,id:string){
+	let $ = require('jquery');
+	$(target).off(makeEventString(event,id));
 }

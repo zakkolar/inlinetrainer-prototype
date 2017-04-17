@@ -5,8 +5,9 @@ import {CATEGORIES} from '../../../categories';
 import {Step} from '../../../step';
 import {ShowHint} from '../../../helpers/show-hint';
 
-import {CheckAndWatchRouteLoad} from '../../../helpers/check-and-watch-route-load';
-import {WatchForEvent} from '../../../helpers/watch-for-event';
+import {CheckAndWatchRouteLoad, UnwatchRouteLoad} from '../../../helpers/check-and-watch-route-load';
+import {CheckAndWatchRouteUnload, UnwatchRouteUnload} from '../../../helpers/check-and-watch-route-unload';
+import {WatchForEvent, UnwatchForEvent} from '../../../helpers/watch-for-event';
 import {WatchForElement} from '../../../helpers/watch-for-element';
 
 
@@ -17,7 +18,16 @@ var steps={};
 				ShowHint('#course_link');
 			},
 			watchComplete:function(callback){
-				CheckAndWatchRouteLoad('/course',callback);
+				CheckAndWatchRouteLoad('/course',this.id(),callback);
+			},
+			watchUncomplete:function(callback){
+				CheckAndWatchRouteUnload('/course',this.id(),callback);
+			},
+			unwatchComplete:function(){
+				UnwatchRouteLoad(this.id());
+			},
+			unwatchUncomplete:function(){
+				UnwatchRouteUnload(this.id());
 			}
 		});
 	steps['editing_on']=new Step({
@@ -31,8 +41,11 @@ var steps={};
 				callback();
 			}
 			else{
-				WatchForEvent('click','#editing_button',callback);
+				WatchForEvent('click','#editing_button',this.id(),callback);
 			}
+		},
+		unwatchComplete:function(){
+			UnwatchForEvent('click','#editing_button',this.id());
 		}
 	});
 	steps['add_block']=new Step({

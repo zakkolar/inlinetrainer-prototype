@@ -9,8 +9,10 @@ export class Action{
 	shown: boolean;
 	help: string;
 	currentStep: Step;
+	previousStep:Step;
 	complete: boolean;
 	currentStepSubscription:string;
+	previousStepSubscription:string;
 
 	constructor(args){
 		this.name=args.name;
@@ -21,6 +23,7 @@ export class Action{
 		this.help = args.help;
 		this.currentStep=null;
 		this.currentStepSubscription=null;
+		this.previousStepSubscription=null;
 		this.complete=false;
 
 	}
@@ -28,7 +31,7 @@ export class Action{
 	initWatchSteps(){
 		let reversedSteps=this.steps.slice().reverse();
 		for(let step of reversedSteps){
-			step.watchComplete();
+      step.initWatch();
 		}
 	}
 
@@ -40,11 +43,13 @@ export class Action{
 					this.setCurrentStep(reversedSteps[parseInt(index) - 1]);
 					break;
 				}
-				else{
-					this.markComplete();
-				}
 			}
 		}
+    if(this.currentStep==null){
+      if(this.steps.length>0){
+        this.setCurrentStep(this.steps[0]);
+      }
+    }
 	}
 
 	currentStepIndex(){
@@ -56,15 +61,33 @@ export class Action{
 		if(this.currentStepSubscription!=null){
 			this.currentStep.unsubscribe(this.currentStepSubscription);
 		}
+		if(this.previousStepSubscription!=null){
+			this.previousStep.unsubscribe(this.previousStepSubscription);
+		}
 		if(index>=0){
 			let action = this;
 			this.currentStep=this.steps[index];
 			this.currentStepSubscription=this.currentStep.subscribe(function(){
 				if(action.currentStep.complete){
-					action.nextStep();
+					action.incrementStep();
+				}
+			});
+      this.currentStep.watchComplete();
+		}
+		if(index>0){
+			let action = this;
+			this.previousStep=this.steps[index-1];
+			this.previousStepSubscription=this.previousStep.subscribe(function(){
+				if(!action.previousStep.complete){
+					action.decrementStep();
 				}
 			});
 		}
+		else{
+			this.previousStep=null;
+			this.previousStepSubscription=null;
+		}
+
 	}
 
 	markComplete(){
@@ -75,7 +98,7 @@ export class Action{
 		}
 	}
 
-	nextStep(){
+	incrementStep(){
 		let nextStepIndex=this.currentStepIndex()+1;
 		if(nextStepIndex>this.steps.length){
 			this.markComplete();
@@ -85,7 +108,7 @@ export class Action{
 		}
 	}
 
-	previousStep(){
+	decrementStep(){
 		let previousStepIndex=this.currentStepIndex()-1;
 		if(previousStepIndex>=0){
 			this.setCurrentStep(this.steps[previousStepIndex]);
@@ -97,5 +120,5 @@ export class Action{
 		this.initWatchSteps();
 		this.initCurrentStep();
 	}
-	
+
 }
