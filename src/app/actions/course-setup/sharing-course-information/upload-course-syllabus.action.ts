@@ -32,7 +32,8 @@ var steps={};
 			},
       checkComplete:function(){
         return RouteLoaded('/course');
-      }
+      },
+      identifier:'course_page'
 		});
 	steps['syllabus_page']=new Step({
 			text:"Click \"Upload Course Syllabus\"",
@@ -53,7 +54,8 @@ var steps={};
 			},
       checkComplete:function(){
         return RouteLoaded('/syllabus');
-      }
+      },
+      identifier:'syllabus_page'
 
 		});
 	steps['browse']=new Step({
@@ -71,7 +73,8 @@ var steps={};
       checkComplete:function(){
         let $ = require('jquery');
         return ($('#syllabus').length>0 && $('#syllabus').val()!='');
-      }
+      },
+      identifier:'browse'
 		});
 
   let uploadClicked=false;
@@ -94,7 +97,8 @@ var steps={};
 			},
       checkComplete:function(){
         return uploadClicked;
-      }
+      },
+      identifier:'upload'
 		});
 	steps['public']=new Step({
 			text:"Click \"Make Course Syllabus Public\" to show your syllabus in the public syllabus directory",
@@ -112,7 +116,8 @@ var steps={};
       checkComplete:function(){
         let $=require('jquery');
         return $('#course_syllabus_public').text()==='Make Course Syllabus Private';
-      }
+      },
+      identifier:'make_public'
 		});
 
 
@@ -132,5 +137,6 @@ export const UploadCourseSyllabusAction:Action = new Action({
 	name: "Upload course syllabus",
 	categories: [CATEGORIES['course_settings']],
 	steps:[steps['course_page'], steps['syllabus_page'], steps['browse'], steps['upload'], steps['public']],
-	help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus"
+	help: "https://kb.brandeis.edu/display/LTS/Upload+Your+Syllabus",
+  identifier:'upload_course_syllabus'
 	});

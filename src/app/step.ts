@@ -15,6 +15,7 @@ export class Step{
 	private _id: string;
   private _postrequisiteSubscriptions: Map<string,Step>;
   private _prerequisiteSubscriptions: Map<string,Step>;
+  identifier: string;
 
 	constructor(params){
 		this.text = params.text || null;
@@ -32,6 +33,7 @@ export class Step{
     this._postrequisiteSubscriptions=new Map<string,Step>();
     this._prerequisiteSubscriptions=new Map<string,Step>();
     this._checkCompleteFunction=params.checkComplete || function(){return true;}
+    this.identifier=params.identifier;
 	}
 
   id(){
@@ -120,6 +122,7 @@ export class Step{
   }
 
 	set complete(complete: boolean){
+    let step=this;
     let old = this._complete;
 		this._complete = complete;
     if(old!=complete){
@@ -132,7 +135,7 @@ export class Step{
       }
 
       this._subscriptions.forEach((subscription: Function, key: string)=>{
-        subscription();
+        subscription(step);
       });
     }
 	}

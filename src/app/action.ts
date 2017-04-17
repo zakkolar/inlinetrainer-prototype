@@ -13,6 +13,7 @@ export class Action{
 	complete: boolean;
 	currentStepSubscription:string;
 	previousStepSubscription:string;
+  identifier:string;
 
 	constructor(args){
 		this.name=args.name;
@@ -25,8 +26,25 @@ export class Action{
 		this.currentStepSubscription=null;
 		this.previousStepSubscription=null;
 		this.complete=false;
+    this.identifier=args.identifier;
 
 	}
+
+  importStepCompletion(data){
+    for(let step of this.steps){
+      if(data.hasOwnProperty(step.identifier)){
+        step.complete=data[step.identifier];
+      }
+    }
+  }
+
+  exportStepCompletion(){
+    let data = {};
+    for(let step of this.steps){
+      data[step.identifier]=step.complete;
+    }
+    return data;
+  }
 
 	initWatchSteps(){
 		let reversedSteps=this.steps.slice().reverse();
@@ -119,6 +137,15 @@ export class Action{
 	initSteps(){
 		this.initWatchSteps();
 		this.initCurrentStep();
+
 	}
+
+  resetSteps(){
+    let reversedSteps=this.steps.slice().reverse();
+    for(let step of reversedSteps){
+      step.complete=false;
+    }
+    this.setCurrentStep(this.steps[0]);
+  }
 
 }

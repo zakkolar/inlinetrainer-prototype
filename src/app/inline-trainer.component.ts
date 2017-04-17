@@ -12,6 +12,8 @@ import {HELPERS} from './helpers';
 
 import {RecentActionsService} from './recent-actions.service';
 
+import {SyncAction, RetrieveAction} from './helpers/sync-action';
+
 
 
 var subcategories={};
@@ -50,14 +52,16 @@ export class InlineTrainerComponent implements AfterViewInit  {
 
 	ngAfterViewInit(){
 		for(let action of this.actions){
+      action.importStepCompletion(RetrieveAction(action));
 			action.initSteps();
+      SyncAction(action);
 		}
 
-		
+
 
 	}
 
-	
+
 
 	stringify=HELPERS.stringify;
 	search="";

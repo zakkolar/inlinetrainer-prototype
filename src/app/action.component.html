@@ -12,6 +12,9 @@
       <a *ngIf="step.help!=null && step===action.currentStep" href='#' (click)="run_help($event,step)"><i class="fa fa-question-circle" aria-hidden="true"></i></a>
       <!-- <a *ngIf="step===action.currentStep" class='success' (click)="step.complete=true"><i class="fa fa-check" aria-hidden="true"></i></a> -->
 		</li>
+    <li class='list-unstyled'>
+      <a href (click)="action.resetSteps(); false" *ngIf="action.steps[0]!==action.currentStep" class='text-danger'>Start over</a>
+    </li>
 	</ol>
 
 
