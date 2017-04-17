@@ -1,14 +1,15 @@
 import {Step} from '../step';
 import {Action} from '../action';
-let Lockr=require('lockr');
-export const SyncAction=function(action:Action){
+let lscache=require('lscache');
+lscache.setBucket('zk_inline_trainer');
+export const SyncAction=function(action:Action, expiration:number=10){
   for(let step of action.steps){
     step.subscribe(function(){
-      Lockr.set(action.identifier,action.exportStepCompletion());
+      lscache.set(action.identifier,action.exportStepCompletion(), expiration);
     });
   }
 
 }
 export const RetrieveAction=function(action:Action){
-  return Lockr.get(action.identifier);
+  return lscache.get(action.identifier) || {};
 }
