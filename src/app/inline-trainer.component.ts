@@ -54,7 +54,7 @@ export class InlineTrainerComponent implements AfterViewInit  {
 		for(let action of this.actions){
       action.importStepCompletion(RetrieveAction(action));
 			action.initSteps();
-      SyncAction(action,10);
+      SyncAction(action,120);
 		}
 
 
