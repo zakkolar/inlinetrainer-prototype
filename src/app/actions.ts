@@ -53,7 +53,10 @@ import {UploadCourseSyllabusAction} from './actions/course-setup/sharing-course-
 actions.push(UploadCourseSyllabusAction);
 
 import {SetUpCalendarAction} from './actions/course-setup/course-calendar/set-up-calendar.action';
-// actions.push(SetUpCalendarAction);
+actions.push(SetUpCalendarAction);
+
+import {AddEntryToCalendarAction} from './actions/course-setup/course-calendar/add-entry-to-calendar.action';
+actions.push(AddEntryToCalendarAction);
 
 assembleActions(actions,[CATEGORIES['old_courses']],[
 	"Reuse an existing course",

@@ -120,15 +120,15 @@
         </div>
       </div>
 
-  	
+
 
       <div class="card" id='add_block' *ngIf="globals.editing">
         <div class="card-header h6 card-inverse card-primary">
           Add a Block
         </div>
         <div class="card-block">
-         
-        <select class='form-control' (change)="addBlock($event)">
+
+        <select class='form-control' id='add_block_dropdown' (change)="addBlock($event)">
           <option value="">Add...</option>
           <option value="accessibility">Accessibility</option>
           <option value="activity_modules">Activities</option>
@@ -169,7 +169,7 @@
         	Calendar
         </div>
         <div class="card-block">
-         
+
         <table class='table table-sm' >
 <thead>
   <tr>
@@ -208,8 +208,8 @@
   		<div class='col-sm-6'>
   			<router-outlet></router-outlet>
   		</div>
-  		
-  		
+
+
 
 
 

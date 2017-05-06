@@ -23,7 +23,7 @@ var routeLabels={
 var globals={
 	editing:false,
 	blocks:{
-		calendar:false
+		calendar:true
 	}
 };
 
@@ -41,10 +41,10 @@ var globals={
 
 	globals=globals;
 
-	
+
 	constructor(private _router: Router ) {
 	  this.router = _router;
-	  
+
 	}
 
 	routeName(route){

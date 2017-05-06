@@ -1,36 +1,80 @@
 <h1>New Event</h1>
 
 <form>
-	<div class='form-group row' id='event_type'>
-		<label for='type' class='col-4 col-form-label'>Type of event</label>
-		<div class='col-8'>
-			<select id='type' class='form-control'>
-				<option>User</option>
-				<option>Course</option>
-			</select>
-		</div>
-	</div>
-	<div class='form-group row' id='event_title'>
-		<label for='title' class='col-4 col-form-label'>Event Title</label>
-		<div class='col-8'>
-			<input name='title' id='title' class='form-control' type='text'>
-		</div>
-	</div>
-	<div class='form-group row' id='event_description'>
-		<label for='description' class='col-4 col-form-label'>Description</label>
-		<div class='col-8'>
-			<textarea name='description' id='description' class='form-control' rows=8></textarea>
-		</div>
-	</div>
-	<div class='form-group row' id='event_date'>
-		<label for='date' class='col-4 col-form-label'>Date</label>
-		<div class='col-8'>
-			<input name='date' id='date' class='form-control' type='datetime-local'>
-		</div>
-	</div>
-	<div class='form-group row'>
-		<div class='col-8 offset-4'>
-			<button class='btn btn-primary' id='save_event' routerLink="/calendar">Save Changes</button>
-		</div>
-	</div>
+  <ngb-accordion activeIds="general">
+    <ngb-panel title="General" id='general'>
+      <template ngbPanelContent>
+        <div class='form-group row' id='event_type'>
+          <label for='type' class='col-4 col-form-label'>Type of event</label>
+          <div class='col-8'>
+            <select id='type' class='form-control'>
+              <option>User</option>
+              <option>Course</option>
+            </select>
+          </div>
+        </div>
+        <div class='form-group row' id='event_title'>
+          <label for='title' class='col-4 col-form-label'>Event Title</label>
+          <div class='col-8'>
+            <input name='title' id='title' class='form-control' type='text'>
+          </div>
+        </div>
+        <div class='form-group row' id='event_description'>
+          <label for='description' class='col-4 col-form-label'>Description</label>
+          <div class='col-8'>
+            <textarea name='description' id='description' class='form-control' rows=8></textarea>
+          </div>
+        </div>
+        <div class='form-group row' id='event_date'>
+          <label for='date' class='col-4 col-form-label'>Date</label>
+          <div class='col-8'>
+            <input name='date' id='date' class='form-control' type='datetime-local'>
+          </div>
+        </div>
+
+      </template>
+    </ngb-panel>
+    <ngb-panel title="Duration">
+      <template ngbPanelContent>
+        <div class="form-check">
+          <label class="form-check-label">
+            <input class="form-check-input" [(ngModel)]='duration_type' name="duration_type" type="radio" value="none">
+            Without duration
+          </label>
+        </div>
+        <div class="form-check" >
+          <label class="form-check-label">
+            <input class="form-check-input" [(ngModel)]='duration_type' name="duration_type" type="radio" value="until">
+            Until
+          </label>
+          <div class='form-group row' >
+            <div class='col-8'>
+              <input [disabled]="duration_type!=='until'" name='date' id='duration_until' class='form-control' type='datetime-local'>
+            </div>
+          </div>
+        </div>
+      </template>
+    </ngb-panel>
+    <ngb-panel title="Repeated events">
+      <template ngbPanelContent>
+        <div class="form-check" >
+          <label class="form-check-label">
+            <input class="form-check-input" [(ngModel)]='repeated_event' name="repeated_event" type="checkbox" value="true">
+            Repeat this event
+          </label>
+          <div class='form-group row' >
+            <label class='col-6 col-form-label' for='repeat_num_times'>Repeat weekly, creating altogther</label>
+            <div class='col-6'>
+              <input [disabled]="!repeated_event" id='repeat_num_times' class='form-control' type='number'>
+            </div>
+          </div>
+        </div>
+      </template>
+    </ngb-panel>
+  </ngb-accordion>
+  <div class='form-group row'>
+          <div class='col-8 offset-4'>
+            <button class='btn btn-primary' id='save_event' routerLink="/calendar">Save Changes</button>
+          </div>
+        </div>
 </form>

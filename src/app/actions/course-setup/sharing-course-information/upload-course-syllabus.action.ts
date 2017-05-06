@@ -7,8 +7,6 @@ import {ShowHint} from '../../../helpers/show-hint';
 import {OnRouteLoad, OffRouteLoad} from '../../../helpers/on-route-load';
 import {OnRouteUnload, OffRouteUnload} from '../../../helpers/on-route-unload';
 import {RouteLoaded} from '../../../helpers/route-loaded';
-import {CheckAndWatchRouteLoad, UnwatchRouteLoad} from '../../../helpers/check-and-watch-route-load';
-import {CheckAndWatchRouteUnload, UnwatchRouteUnload} from '../../../helpers/check-and-watch-route-unload';
 import {WatchForEvent, UnwatchForEvent} from '../../../helpers/watch-for-event';
 import {MarkElement,UnmarkElement,CheckElementForMark} from '../../../helpers/mark-element';
 
@@ -98,7 +96,8 @@ var steps={};
       checkComplete:function(){
         return uploadClicked;
       },
-      identifier:'upload'
+      identifier:'upload',
+      persistent:true
 		});
 	steps['public']=new Step({
 			text:"Click \"Make Course Syllabus Public\" to show your syllabus in the public syllabus directory",
@@ -117,7 +116,8 @@ var steps={};
         let $=require('jquery');
         return $('#course_syllabus_public').text()==='Make Course Syllabus Private';
       },
-      identifier:'make_public'
+      identifier:'make_public',
+      persistent:true
 		});
 
 

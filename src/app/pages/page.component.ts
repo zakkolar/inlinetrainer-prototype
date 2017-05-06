@@ -15,4 +15,6 @@ import { Component, Input } from '@angular/core';
 
 @Component({
 	templateUrl: './new_event.component.html'
-}) export class NewEventComponent{}
+}) export class NewEventComponent{
+  duration_type='none'
+}

@@ -53,7 +53,10 @@ export class InlineTrainerComponent implements AfterViewInit  {
 	ngAfterViewInit(){
 		for(let action of this.actions){
       action.importStepCompletion(RetrieveAction(action));
-			action.initSteps();
+      setTimeout(function(){
+        action.initSteps();
+      },3000);
+
       SyncAction(action,120);
 		}
 

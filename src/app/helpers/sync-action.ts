@@ -5,7 +5,9 @@ lscache.setBucket('zk_inline_trainer');
 export const SyncAction=function(action:Action, expiration:number=10){
   for(let step of action.steps){
     step.subscribe(function(){
-      lscache.set(action.identifier,action.exportStepCompletion(), expiration);
+      if(step.persistent){
+        lscache.set(action.identifier,action.exportStepCompletion(), expiration);
+      }
     });
   }
 

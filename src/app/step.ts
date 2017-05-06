@@ -15,7 +15,9 @@ export class Step{
 	private _id: string;
   private _postrequisiteSubscriptions: Map<string,Step>;
   private _prerequisiteSubscriptions: Map<string,Step>;
+  private _skipPrerequisitesOnInit: boolean;
   identifier: string;
+  persistent: boolean;
 
 	constructor(params){
 		this.text = params.text || null;
@@ -32,8 +34,10 @@ export class Step{
 		this._id = GUID();
     this._postrequisiteSubscriptions=new Map<string,Step>();
     this._prerequisiteSubscriptions=new Map<string,Step>();
-    this._checkCompleteFunction=params.checkComplete || function(){return true;}
+    this._checkCompleteFunction=params.checkComplete || function(){return false;}
     this.identifier=params.identifier;
+    this.persistent=params.persistent || false;
+    this._skipPrerequisitesOnInit=params.skipPrerequisitesOnInit || false;
 	}
 
   id(){
@@ -57,6 +61,12 @@ export class Step{
   prerequisitesComplete(){
     let step = this;
     for(let prerequisite of step._prerequisites){
+      prerequisite._postrequisites.forEach(function(post){
+        if(post===step){
+          console.log(step.text,'is a postrequisite of its prerequisite',prerequisite.text);
+        }
+      });
+
       if(!prerequisite.complete){
         return false;
       }
@@ -113,8 +123,8 @@ export class Step{
     let step = this;
     step.watchPostrequisites();
     step.watchPrerequisites();
-    step.checkComplete();
     step.watchComplete();
+    step.checkComplete();
   }
 
   get complete(){
