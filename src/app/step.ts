@@ -61,11 +61,6 @@ export class Step{
   prerequisitesComplete(){
     let step = this;
     for(let prerequisite of step._prerequisites){
-      prerequisite._postrequisites.forEach(function(post){
-        if(post===step){
-          console.log(step.text,'is a postrequisite of its prerequisite',prerequisite.text);
-        }
-      });
 
       if(!prerequisite.complete){
         return false;
@@ -74,9 +69,9 @@ export class Step{
     return true;
   }
 
-  checkComplete(){
+  checkComplete(init:boolean=true){
     let step = this;
-    if(!step.prerequisitesComplete()){
+    if(!step.prerequisitesComplete() && (!init || (init && !step._skipPrerequisitesOnInit))){
       step.complete = false;
     }
     else if(step._checkCompleteFunction() || step.postrequisitesComplete()){
@@ -124,7 +119,7 @@ export class Step{
     step.watchPostrequisites();
     step.watchPrerequisites();
     step.watchComplete();
-    step.checkComplete();
+    step.checkComplete(true);
   }
 
   get complete(){

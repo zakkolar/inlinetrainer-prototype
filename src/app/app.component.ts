@@ -23,7 +23,7 @@ var routeLabels={
 var globals={
 	editing:false,
 	blocks:{
-		calendar:true
+		calendar:false
 	}
 };
 

@@ -79,7 +79,8 @@ var steps={};
     checkComplete:function(){
       let $ = require('jquery');
       return $('#calendar').length>0;
-    }
+    },
+    skipPrerequisitesOnInit:true
 	});
 
   steps['course_page'].addPostrequisite(steps['editing_on']);
