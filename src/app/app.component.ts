@@ -23,7 +23,7 @@ const routeLabels = {
 const globals = {
   editing: false,
   blocks: {
-    calendar: true
+    calendar: false
   }
 };
 
@@ -31,15 +31,15 @@ const globals = {
 @Component({
   selector: 'app',
   templateUrl: './app.component.html',
-}) export class AppComponent  {
+}) export class AppComponent implements OnInit  {
 
   router;
 
   course_utilties = COURSE_UTILITIES;
 
-  syllabus_public=false;
+  syllabus_public = false;
 
-  globals=globals;
+  globals = globals;
 
 
   constructor(private _router: Router ) {

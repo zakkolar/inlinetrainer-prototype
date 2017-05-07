@@ -24,9 +24,9 @@ var showSearch=false;
 
 
 for(var category in CATEGORIES){
-	if(CATEGORIES[category].parent!=null){
-		CATEGORIES[category].open=false;
-	}
+  if(CATEGORIES[category].parent!=null){
+    CATEGORIES[category].open=false;
+  }
 }
 
 
@@ -41,35 +41,34 @@ for(var category in CATEGORIES){
 
 
 export class InlineTrainerComponent implements AfterViewInit  {
-	categories=CATEGORIES;
-	actions:Action[]=ACTIONS;
+  categories = CATEGORIES;
+  actions: Action[] = ACTIONS;
 
-	settings=SETTINGS;
+  settings = SETTINGS;
 
-	subcategories=subcategories;
+  subcategories = subcategories;
 
-	recent_actions = new RecentActionsService();
+  recent_actions = new RecentActionsService();
 
-	ngAfterViewInit(){
-		for(let action of this.actions){
+  ngAfterViewInit(){
+    for (const action of this.actions){
       action.importStepCompletion(RetrieveAction(action));
-      setTimeout(function(){
-        action.initSteps();
-      },3000);
-
-      SyncAction(action,120);
-		}
+      action.initSteps();
 
 
-
-	}
+      SyncAction(action, 120);
+    }
 
 
 
-	stringify=HELPERS.stringify;
-	search="";
+  }
 
-  	@Input() globals;
+
+
+  stringify=HELPERS.stringify;
+  search="";
+
+    @Input() globals;
 
 }
 
