@@ -14,17 +14,17 @@ import {Router, NavigationEnd} from '@angular/router';
 
 import {COURSE_UTILITIES} from './course-utilities';
 
-var routeLabels={
-	syllabus:'Syllabus',
-	calendar: 'Calendar',
-	new_event: 'Calendar'
+const routeLabels = {
+  syllabus: 'Syllabus',
+  calendar: 'Calendar',
+  new_event: 'Calendar'
 };
 
-var globals={
-	editing:false,
-	blocks:{
-		calendar:false
-	}
+const globals = {
+  editing: false,
+  blocks: {
+    calendar: true
+  }
 };
 
 
@@ -33,30 +33,30 @@ var globals={
   templateUrl: './app.component.html',
 }) export class AppComponent  {
 
-	router;
+  router;
 
-	course_utilties=COURSE_UTILITIES;
+  course_utilties = COURSE_UTILITIES;
 
-	syllabus_public=false;
+  syllabus_public=false;
 
-	globals=globals;
+  globals=globals;
 
 
-	constructor(private _router: Router ) {
-	  this.router = _router;
+  constructor(private _router: Router ) {
+    this.router = _router;
 
-	}
+  }
 
-	routeName(route){
-		return routeLabels[route.substr(1)];
-	}
+  routeName(route){
+    return routeLabels[route.substr(1)];
+  }
 
-	addBlock(event){
-		var block = event.target.value;
-		this.globals.blocks[block]=true;
-	}
+  addBlock(event){
+    var block = event.target.value;
+    this.globals.blocks[block]=true;
+  }
 
-	ngOnInit() {
+  ngOnInit() {
         this.router.events.subscribe((evt) => {
             if (!(evt instanceof NavigationEnd)) {
                 return;

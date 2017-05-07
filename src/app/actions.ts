@@ -4,7 +4,7 @@ import {CATEGORIES} from './categories';
 
 import {Category} from './category';
 
-import {Step} from './step';
+import {Step} from './step/step';
 
 import {HINT} from './tour_components/hint';
 import {SLIDE} from './tour_components/slide';

@@ -1,14 +1,14 @@
-import { NgModule }      from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AppComponent }  from './app.component';
+import { AppComponent } from './app.component';
 import { ActionComponent } from './action.component';
 import { InlineTrainerComponent } from './inline-trainer.component';
 
 import {SyllabusComponent, CourseComponent, CalendarComponent, NewEventComponent} from './pages/page.component';
 
-import { FormsModule }    from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
@@ -42,5 +42,5 @@ const appRoutes: Routes = [
 
 export class AppModule{
 
-	
+
 }

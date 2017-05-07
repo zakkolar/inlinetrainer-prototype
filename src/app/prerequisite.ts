@@ -1,5 +1,5 @@
-import {Step} from './step';
+import {Step} from './step/step';
 export class Prerequisite{
 	step: Step;
-	
+
 }

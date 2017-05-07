@@ -1,4 +1,4 @@
-import {Step} from '../step';
+import {Step} from '../step/step';
 import {Action} from '../action';
 let lscache=require('lscache');
 lscache.setBucket('zk_inline_trainer');
