@@ -1,6 +1,6 @@
-import {Action} from '../../../action';
+import {Action} from '../../../trainer/action';
 
-import {CATEGORIES} from '../../../categories';
+import {CATEGORIES} from '../../../trainer/categories';
 
 import {Step} from '../../../step/step';
 import {RouteStep} from '../../../step/route-step';
@@ -12,7 +12,7 @@ import {CheckValue} from '../../../helpers/check-value';
 import {WatchForEvent, UnwatchForEvent} from '../../../helpers/watch-for-event';
 
 
-var steps={};
+const steps = {};
 steps['course_page'] = new RouteStep({
   text: 'Navigate to course page',
   help: function(){
@@ -63,10 +63,6 @@ steps['add_block']= new Step({
 
 steps['course_page'].addPostrequisite(steps['editing_on']);
 steps['editing_on'].addPostrequisite(steps['add_block']);
-
-
-
-
 
 export const SetUpCalendarAction: Action = new Action({
   name: 'Set Up Calendar',

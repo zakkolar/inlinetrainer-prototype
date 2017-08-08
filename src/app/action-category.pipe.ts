@@ -1,7 +1,7 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Action } from './action';
-import { Category } from './category';
+import { Action } from './trainer/action';
+import { Category } from './trainer/category';
 
 @Pipe({ name: 'actionCategory' })
 export class ActionCategoryPipe implements PipeTransform {

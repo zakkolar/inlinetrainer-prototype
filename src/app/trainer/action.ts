@@ -1,5 +1,5 @@
 import {Category} from './category';
-import {Step} from './step/step';
+import {Step} from '../step/step';
 export class Action {
   name: string;
   categories: Category[];

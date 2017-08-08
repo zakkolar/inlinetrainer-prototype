@@ -1,97 +1,83 @@
 import {GUID} from '../helpers/guid';
 export const HINT = function(selector){
 
-
-	
-
-	var removeHint=function(el){
-
-		var overlay = $('.'+overlayClass);
-		var wrapperClass = $('.'+wrapperClass);
-		var wrapper = $()
-		overlay.fadeOut(animationSpeed, function(){
-			overlay.remove();
-			el.css('margin', wrapper.css('margin'));
-			el.unwrap();
-			el.removeAttr('data-hinted');
-			$(document).off('keyup.zk-hint');
-			el.off('click.zk-hint');
-		});
-		
-	}
-
-	var removeAll=function(){
-		$("*[data-hinted='true']").each(function(){
-			removeHint($(this));
-		});
-	}
-
-	var $ = require('jquery');
-	var el =$(selector);
-	var animationSpeed=500;
-
-	var overlayClass="block_inlinetrainer_overlay";
-	var wrapperClass="block_inlinetrainer_hint";
-
-	if(el.attr('data-hinted')==='true'){
-		return false;
-	}
-
-	var hintID = GUID();
-
-	removeAll();
-
-	var overlay = $("<div class='"+overlayClass+"'></div>").hide();
-	$('body').append(overlay);
-	overlay.fadeIn(animationSpeed);
-	
-	el.attr('data-hinted','true');
-	var wrapper = $('<div class="block_inlinetrainer_hint"></div>').css({
-		'z-index': overlay.css('z-index')+1,
-		'margin':el.css('margin'),
-		'background-color':$('body').css('background-color')
-	});
-	var directions = ['left','right','top','bottom'];
-	for(var i=0; i<directions.length; i++){
-		var direction = directions[i];
-		wrapper.css('margin-'+direction,function(){
-			var currentMargin = parseInt($(this).css('margin-'+direction));
-			var currentPadding = $(this).css('padding');
-			
-			return 0;
-		});
-	}
-	
-	el.wrap(wrapper).css('margin','0');
+  const $ = require('jquery');
 
 
 
-	var removeHint=function(el){
+  const el =$(selector);
+  const hintID = 'zk-hint-' + GUID();
+  const animationSpeed = 500;
+  const padding = 5;
 
-		var overlay = $('.'+overlayClass);
-		overlay.fadeOut(animationSpeed, function(){
-			overlay.remove();
-			el.css('margin',wrapper.css('margin'));
-			el.unwrap();
-			el.removeAttr('data-hinted');
-			$(document).off('keyup.zk-hint-'+hintID);
-			el.off('click.zk-hint-'+hintID);
-		});
-		
-	}
+  const overlayClass = 'block_inlinetrainer_overlay';
 
-	overlay.on('click.zk-hint-'+hintID,function(){
-		removeHint(el);
-	});
+  const removeOverlay = function(){
+    $('.' + overlayClass).fadeOut(animationSpeed, function(){
+      $(this).remove();
+    });
+    $(document).off('keyup.' + hintID);
+    el.off('click.' + hintID);
+  };
+  removeOverlay();
 
-	el.on('click.zk-hint-'+hintID,function(){
-		removeHint(el);
-	})
+  const directions = ['left', 'right', 'top', 'bottom'];
+  for (let i = 0; i < directions.length; i++) {
+    const overlay = $('<div class="' + overlayClass + '"></div>').hide();
+    switch (directions[i]) {
+      case 'top':
+        overlay.css({
+          top:0,
+          left:0,
+          right:0,
+          height: el.offset().top - padding,
+        });
+        break;
+      case 'left':
+        overlay.css({
+          top: el.offset().top - padding,
+          width: el.offset().left - padding,
+          left: 0,
+          height: el.outerHeight() + (padding * 2)
+        });
+        break;
+      case 'right':
+        overlay.css({
+          top: el.offset().top - padding,
+          left: el.offset().left + el.outerWidth() + padding,
+          right: 0,
+          height: el.outerHeight() + (padding * 2)
+        });
+        break;
+      case 'bottom':
+        overlay.css({
+          top: el.offset().top + el.outerHeight() + padding,
+          left:0,
+          right:0,
+          bottom: 0
+        });
+        break;
+    }
+    $('body').append(overlay).css('position', 'relative');
+  }
 
-	$(document).on('keyup.zk-hint'+hintID,function(e) {
-     if (e.keyCode == 27) {
-     	removeHint(el);
-    	}
-	});
+  //since this element will be deleted, we don't need to worry about namespacing the click event
+  $('.' + overlayClass).fadeIn(animationSpeed).click(function(){
+    removeOverlay();
+  });
 
-}
+    el.on('click.' + hintID, function(){
+      removeOverlay();
+    });
+    $(document).on('keyup.' + hintID,function(e) {
+      if (e.keyCode === 27) {
+        removeOverlay();
+      }
+    });
+
+
+
+
+
+
+};

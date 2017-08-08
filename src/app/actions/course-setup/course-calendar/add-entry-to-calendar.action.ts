@@ -1,6 +1,6 @@
-import {Action} from '../../../action';
+import {Action} from '../../../trainer/action';
 
-import {CATEGORIES} from '../../../categories';
+import {CATEGORIES} from '../../../trainer/categories';
 
 import {Step} from '../../../step/step';
 import {RouteStep} from '../../../step/route-step';

@@ -4,17 +4,17 @@ import {CATEGORIES} from './categories';
 
 import {Category} from './category';
 
-import {Step} from './step/step';
+import {Step} from '../step/step';
 
-import {HINT} from './tour_components/hint';
-import {SLIDE} from './tour_components/slide';
-import {UNBLOCK_ELEMENT} from './tour_components/unblock_element';
+import {HINT} from '../tour_components/hint';
+import {SLIDE} from '../tour_components/slide';
+import {UNBLOCK_ELEMENT} from '../tour_components/unblock_element';
 
-import {GUID} from './helpers/guid';
+import {GUID} from '../helpers/guid';
 
-import {ShowHint} from './helpers/show-hint';
+import {ShowHint} from '../helpers/show-hint';
 
-import {WatchForEvent} from './helpers/watch-for-event';
+import {WatchForEvent} from '../helpers/watch-for-event';
 
 
 var showHint = ShowHint;
@@ -49,13 +49,13 @@ let actions:Action[]=[];
 
 
 
-import {UploadCourseSyllabusAction} from './actions/course-setup/sharing-course-information/upload-course-syllabus.action';
+import {UploadCourseSyllabusAction} from '../actions/course-setup/sharing-course-information/upload-course-syllabus.action';
 actions.push(UploadCourseSyllabusAction);
 
-import {SetUpCalendarAction} from './actions/course-setup/course-calendar/set-up-calendar.action';
+import {SetUpCalendarAction} from '../actions/course-setup/course-calendar/set-up-calendar.action';
 actions.push(SetUpCalendarAction);
 
-import {AddEntryToCalendarAction} from './actions/course-setup/course-calendar/add-entry-to-calendar.action';
+import {AddEntryToCalendarAction} from '../actions/course-setup/course-calendar/add-entry-to-calendar.action';
 actions.push(AddEntryToCalendarAction);
 
 assembleActions(actions,[CATEGORIES['old_courses']],[

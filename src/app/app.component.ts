@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import {CATEGORIES} from './categories';
+import {CATEGORIES} from './trainer/categories';
 
-import {ACTIONS} from './actions';
+import {ACTIONS} from './trainer/actions';
 
 import {SETTINGS} from './settings';
 
-import {HELPERS} from './helpers';
+import {HELPERS} from './trainer/helpers';
 
 import {RecentActionsService} from './recent-actions.service';
 

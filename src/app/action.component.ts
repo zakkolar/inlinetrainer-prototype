@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
-import {Action} from './action';
-import {HELPERS} from './helpers';
+import {Action} from './trainer/action';
+import {HELPERS} from './trainer/helpers';
 
 import {Router, NavigationEnd, Event} from '@angular/router';
 

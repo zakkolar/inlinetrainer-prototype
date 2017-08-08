@@ -1,6 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
-import { Category } from './category';
+import { Category } from './trainer/category';
 
 @Pipe({ name: 'topLevelCategory' })
 export class TopLevelCategoryPipe implements PipeTransform {

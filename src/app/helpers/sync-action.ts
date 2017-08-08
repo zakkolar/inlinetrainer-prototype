@@ -1,5 +1,5 @@
 import {Step} from '../step/step';
-import {Action} from '../action';
+import {Action} from '../trainer/action';
 let lscache = require('lscache');
 lscache.setBucket('zk_inline_trainer');
 export const SyncAction = function (action: Action, expiration = 10){
