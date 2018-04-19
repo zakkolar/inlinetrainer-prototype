@@ -58,7 +58,15 @@ export class InlineTrainerComponent implements AfterViewInit  {
 
       SyncAction(action, 120);
     }
+    const $ = require('jquery');
+    require('jquery-ui/ui/widgets/draggable');
+    $(function(){
+      $('#trainer').draggable({
+        containment:'window',
+        scroll:false
+      })
 
+    });
 
 
   }
