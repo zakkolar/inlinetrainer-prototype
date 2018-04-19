@@ -1,5 +1,9 @@
 # TaxonomyPrototype
 
+This project was created as a prototype for an Inline Trainer plugin for Moodle. The current version of the plugin can be found here: https://github.com/zakkolar/moodle-local_inlinetrainer
+
+# Angular Stuff
+
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
 
 ## Development server
